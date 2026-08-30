@@ -27,7 +27,7 @@ public class KafkaProducer {
 
     public void sendMessage(final String message) {
         log.info("Sending message='{}' to topic='javaguides'", message);
-        
+
         kafkaTemplate.send("javaguides", message);
     }
 
