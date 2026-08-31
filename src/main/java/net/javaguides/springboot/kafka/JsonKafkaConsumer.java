@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class JsonKafkaConsumer {
 
-
     private static final Logger log = LoggerFactory.getLogger(JsonKafkaConsumer.class);
 
     private final KafkaTemplate<String, String> kafkaTemplate;
@@ -28,7 +27,7 @@ public class JsonKafkaConsumer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @KafkaListener(topics = "javaguides_json", groupId = "my-group")
+    @KafkaListener(topics = "${spring.kafka.topic-json.name}", groupId = "${spring.kafka.consumer.group-id}")
     public void consumeJson(final User user) {
         log.info("Consumed JSON message: {}", user);
     }

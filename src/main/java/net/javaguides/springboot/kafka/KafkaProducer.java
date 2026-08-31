@@ -2,6 +2,7 @@ package net.javaguides.springboot.kafka;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class KafkaProducer {
 
     private static final Logger log = LoggerFactory.getLogger(KafkaProducer.class);
 
+    @Value("${spring.kafka.topic.name}")
+    private String topicName;
+
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
@@ -28,7 +32,7 @@ public class KafkaProducer {
     public void sendMessage(final String message) {
         log.info("Sending message='{}' to topic='javaguides'", message);
 
-        kafkaTemplate.send("javaguides", message);
+        kafkaTemplate.send(topicName, message);
     }
 
 }
